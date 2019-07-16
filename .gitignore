@@ -1,0 +1,79 @@
+# https://github.com/github/gitignore
+
+# JetBrains
+.idea/
+*.iml
+cmake-build-*/
+
+# Vim Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Temporary
+*~
+
+# Vim tag files
+tags
+
+# Vim Persistent undo
+[._]*.un~
+
+# Mac
+.DS_Store
+._*
+
+# Xcode
+xcuserdata/
+
+# Build
+/build
+/target
+
+# Wimal
+/cmake/.cache
+/cmake/wimal
+
+# Makefile
+/*/*/Makefile
+
+# http://www.gnu.org/software/automake
+Makefile.in
+*/*/sources/ar-lib
+*/*/sources/mdate-sh
+*/*/sources/py-compile
+*/*/sources/test-driver
+*/*/sources/ylwrap
+
+# http://www.gnu.org/software/autoconf
+autom4te.cache
+*/*/sources/autoscan.log
+*/*/sources/autoscan-*.log
+*/*/sources/aclocal.m4
+*/*/sources/compile
+*/*/sources/config.guess
+*/*/sources/config.h.in
+*/*/sources/config.log
+*/*/sources/config.status
+*/*/sources/config.sub
+*/*/sources/configure
+*/*/sources/configure.scan
+*/*/sources/depcomp
+*/*/sources/install-sh
+*/*/sources/missing
+*/*/sources/stamp-h1
+
+# https://www.gnu.org/software/libtool/
+*/*/sources/ltmain.sh
+
+# http://www.gnu.org/software/texinfo
+*/*/sources/texinfo.tex
+
+# http://www.gnu.org/software/m4/
+*/*/sources/m4/libtool.m4
+*/*/sources/m4/ltoptions.m4
+*/*/sources/m4/ltsugar.m4
+*/*/sources/m4/ltversion.m4
+*/*/sources/m4/lt~obsolete.m4
