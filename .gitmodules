@@ -1,0 +1,4 @@
+[submodule "cmake"]
+	path = cmake
+	url = git@github.com:wimal-build/wimal-cmake.git
+	branch = master
