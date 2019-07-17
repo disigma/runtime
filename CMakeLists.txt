@@ -7,6 +7,7 @@ me_import(
     byobu-5.129
     nginx-1.17.1
     ltrace-0.7.3
+    python-3.7.4
 )
 
 me_import(${ME_EXTRA_PROJECTS})

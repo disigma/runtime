@@ -1,0 +1,3 @@
+# Edit this file for local setup changes
+zlib zlibmodule.c -I@ZLIB_INCLUDE@ @ZLIB_LIBRARY@
+_ctypes _ctypes/_ctypes.c _ctypes/callbacks.c _ctypes/callproc.c _ctypes/stgdict.c _ctypes/cfield.c -I@FFI_INCLUDE@ @FFI_LIBRARY@ -ldl
