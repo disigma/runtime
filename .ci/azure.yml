@@ -21,8 +21,8 @@ jobs:
       sudo dpkg -i $(Agent.TempDirectory)/libc++abi.deb $(Agent.TempDirectory)/libc++.deb
     displayName: 'Installing libc++'
   - script:
-      sudo apt install ninja-build texinfo -y
-    displayName: 'Installing Ninja and texinfo'
+      sudo apt install ninja-build texinfo autopoint -y
+    displayName: 'Installing dependencies'
   - script:
       cmake -E chdir cmake-build
       cmake ..
