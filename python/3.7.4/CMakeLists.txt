@@ -11,6 +11,8 @@ me_project(
     libffi-3.2.1
     expat-2.2.7
     xz-5.2.4
+    readline-8.0
+    ncurses-6.1
 )
 
 set(ZLIB_INCLUDE ${zlib-1.2.11-PREFIX}/include)
@@ -27,6 +29,9 @@ set(
     "-I${libffi-3.2.1-PREFIX}/include"
     "-I${expat-2.2.7-PREFIX}/include"
     "-I${xz-5.2.4-PREFIX}/include"
+    "-I${readline-8.0-PREFIX}/include"
+    "-I${ncurses-6.1-PREFIX}/include/ncurses"
+    "-I${ncurses-6.1-PREFIX}/include"
 )
 foreach(ccflags ${PYTHON_CCFLAGS})
     string(CONCAT PYTHON_CFLAGS ${PYTHON_CFLAGS} " " ${ccflags})
@@ -39,6 +44,17 @@ string(
     "-L${libffi-3.2.1-PREFIX}/lib "
     "-L${expat-2.2.7-PREFIX}/lib "
     "-L${xz-5.2.4-PREFIX}/lib "
+    "-L${readline-8.0-PREFIX}/lib "
+    "-L${ncurses-6.1-PREFIX}/lib "
+)
+
+string(
+    CONCAT PYTHON_LIBS
+    "${readline-8.0-LIBS} "
+    "${ncurses-6.1-LIBS} "
+    "${libffi-3.2.1-LIBS} "
+    "${xz-5.2.4-LIBS} "
+    "-lnsl "
 )
 
 me_autoconf(LIBTOOL)
@@ -56,7 +72,7 @@ me_configure(
     --without-doc-strings
     --enable-loadable-sqlite-extensions
     --with-ssl-default-suites=openssl
-    "--with-libs=${libffi-3.2.1-LIBS} ${xz-5.2.4-LIBS} -lnsl"
+    "--with-libs=${PYTHON_LIBS}"
     CCFLAGS
     ${PYTHON_CCFLAGS}
     ENV
