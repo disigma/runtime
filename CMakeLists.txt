@@ -9,6 +9,7 @@ me_import(
     ltrace-0.7.3
     python-3.7.4
     xz-5.2.4
+    uwsgi-2.0.18
 )
 
 me_import(${ME_EXTRA_PROJECTS})

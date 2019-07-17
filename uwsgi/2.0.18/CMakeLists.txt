@@ -8,6 +8,8 @@ me_project(
     python-3.7.4
     pcre-8.43
     expat-2.2.7
+    zlib-1.2.11
+    libressl-2.9.2--ssl
 )
 
 file(COPY sources/ DESTINATION ${ME_BUILD_DIR} USE_SOURCE_PERMISSIONS)
@@ -16,12 +18,11 @@ file(COPY cmake/local.ini DESTINATION ${ME_BUILD_DIR}/buildconf USE_SOURCE_PERMI
 string(
     CONCAT LDFLAGS
     "-L${python-3.7.4-PREFIX}/lib "
-    "-L${libressl-2.9.2-PREFIX}/lib "
     "-L${pcre-8.43-PREFIX}/lib "
     "-L${expat-2.2.7-PREFIX}/lib "
     "-L${zlib-1.2.11-PREFIX}/lib "
-    "-L${libffi-3.2.1-PREFIX}/lib "
-    "-lpython3.7m -lffi -lutil"
+    "-L${libressl-2.9.2-PREFIX}/lib "
+    "-lpython3.7m "
 )
 
 set(CMAKE_POLICY_DEFAULT_CMP0058 NEW CACHE STRING CMAKE_POLICY_DEFAULT_CMP0058)
@@ -31,13 +32,12 @@ me_configure(
     OUTPUT ${ME_BUILD_DIR}/uwsgi
     ENV
     "LDFLAGS=${LDFLAGS}"
-    "UWSGI_PYTHON_NOLIB=1"
     CFLAGS
     "-I${python-3.7.4-PREFIX}/include/python3.7m"
-    "-I${libressl-2.9.2-PREFIX}/include"
     "-I${pcre-8.43-PREFIX}/include"
-    "-I${zlib-1.2.11-PREFIX}/include"
     "-I${expat-2.2.7-PREFIX}/include"
+    "-I${zlib-1.2.11-PREFIX}/include"
+    "-I${libressl-2.9.2-PREFIX}/include"
     FILE "${python-3.7.4-PREFIX}/bin/python3.7"
     FLAGS ${ME_SOURCE_DIR}/uwsgiconfig.py -b local
 )

@@ -1,3 +1,13 @@
 # Edit this file for local setup changes
 zlib zlibmodule.c -I@ZLIB_INCLUDE@ @ZLIB_LIBRARY@
 _ctypes _ctypes/_ctypes.c _ctypes/callbacks.c _ctypes/callproc.c _ctypes/stgdict.c _ctypes/cfield.c -I@FFI_INCLUDE@ @FFI_LIBRARY@ -ldl
+nis nismodule.c -lnsl
+
+_md5 md5module.c
+
+_sha1 sha1module.c
+_sha256 sha256module.c
+_sha512 sha512module.c
+_sha3 _sha3/sha3module.c
+
+_blake2 _blake2/blake2module.c _blake2/blake2b_impl.c _blake2/blake2s_impl.c

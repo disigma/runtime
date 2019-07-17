@@ -3,12 +3,14 @@ cmake_minimum_required(VERSION 3.0)
 include(../../cmake/Me.cmake)
 
 me_project(
-    python-3.7.4 3RD INSTALL
+    python-3.7.4 3RD
     LIBNAME python3.7m
     DEPENDS
     libressl-2.9.2--ssl
     zlib-1.2.11
     libffi-3.2.1
+    expat-2.2.7
+    xz-5.2.4
 )
 
 set(ZLIB_INCLUDE ${zlib-1.2.11-PREFIX}/include)
@@ -17,21 +19,68 @@ set(FFI_INCLUDE ${libffi-3.2.1-PREFIX}/lib/libffi-3.2.1/include)
 set(FFI_LIBRARY ${libffi-3.2.1-LIBS})
 configure_file(cmake/Setup.local ${ME_BUILD_DIR}/Modules/Setup.local @ONLY)
 
+
+set(
+    PYTHON_CCFLAGS
+    "-I${libressl-2.9.2-PREFIX}/include"
+    "-I${zlib-1.2.11-PREFIX}/include"
+    "-I${libffi-3.2.1-PREFIX}/include"
+    "-I${expat-2.2.7-PREFIX}/include"
+    "-I${xz-5.2.4-PREFIX}/include"
+)
+foreach(ccflags ${PYTHON_CCFLAGS})
+    string(CONCAT PYTHON_CFLAGS ${PYTHON_CFLAGS} " " ${ccflags})
+endforeach()
+
+string(
+    CONCAT PYTHON_LDFLAGS
+    "-L${libressl-2.9.2-PREFIX}/lib "
+    "-L${zlib-1.2.11-PREFIX}/lib "
+    "-L${libffi-3.2.1-PREFIX}/lib "
+    "-L${expat-2.2.7-PREFIX}/lib "
+    "-L${xz-5.2.4-PREFIX}/lib "
+)
+
 me_autoconf(LIBTOOL)
 me_configure(
     FLAGS
+    --prefix=${ME_INSTALL_PREFIX}
     --build=x86_64
     --disable-ipv6
     --without-ensurepip
+    --with-system-expat
     --with-system-ffi
     --enable-optimizations
     --with-lto
     --without-dtrace
     --without-doc-strings
-    ENV "CONFIG_SITE=${CMAKE_CURRENT_LIST_DIR}/cmake/config.site"
-    NO_PIC NO_STATIC NO_SYSROOT NO_HOST
+    --enable-loadable-sqlite-extensions
+    --with-ssl-default-suites=openssl
+    "--with-libs=${libffi-3.2.1-LIBS} ${xz-5.2.4-LIBS} -lnsl"
+    CCFLAGS
+    ${PYTHON_CCFLAGS}
+    ENV
+    "CONFIG_SITE=${CMAKE_CURRENT_LIST_DIR}/cmake/config.site"
+    "LDFLAGS=${PYTHON_LDFLAGS}"
+    NO_FLAGS
 )
 me_make(
-    ENV "PATH=${CMAKE_CURRENT_LIST_DIR}/cmake:$ENV{PATH}"
+    ENV
+    "PATH=${CMAKE_CURRENT_LIST_DIR}/cmake:$ENV{PATH}"
+    "CFLAGS=${PYTHON_CFLAGS}"
+    "LDFLAGS=${PYTHON_LDFLAGS}"
     OUTPUT make ${ME_INSTALL_PREFIX}/bin/python3.7
+    TARGETS build_all altinstall
 )
+
+install(
+    DIRECTORY ${ME_INSTALL_PREFIX}/
+    DESTINATION ${CMAKE_INSTALL_PREFIX}
+    USE_SOURCE_PERMISSIONS
+    COMPONENT ${ME_PROJECT}
+    PATTERN __pycache__ EXCLUDE
+    PATTERN pkgconfig EXCLUDE
+    PATTERN libpython3.7m.a EXCLUDE
+    PATTERN config-3.7m-* EXCLUDE
+)
+me_install_target(${ME_PROJECT})
