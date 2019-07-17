@@ -25,6 +25,7 @@ string(
 )
 me_configure(
     FLAGS
+    "--sbin-path=${ME_INSTALL_PREFIX}/bin/nginx"
     "--with-cc-opt=${NGINX_CFLAGS}"
     "--with-ld-opt=${NGINX_LDFLAGS}"
     "--build=${ME_TRIPLE}"
