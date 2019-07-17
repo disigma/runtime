@@ -5,6 +5,7 @@ include(cmake/Me.cmake)
 
 me_import(
     byobu-5.129
+    nginx-1.17.1
 )
 
 me_import(${ME_EXTRA_PROJECTS})
