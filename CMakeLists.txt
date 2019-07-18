@@ -4,6 +4,7 @@ include(cmake/MeRoot.cmake)
 include(cmake/Me.cmake)
 
 me_import(
+    influxdb-1.7.7
     fluent-bit-1.2.1
     byobu-5.129
     nginx-1.17.1
