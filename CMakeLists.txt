@@ -4,6 +4,7 @@ include(cmake/MeRoot.cmake)
 include(cmake/Me.cmake)
 
 me_import(
+    fluent-bit-1.2.1
     byobu-5.129
     nginx-1.17.1
     ltrace-0.7.3

@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.0)
+
+include(../../cmake/Me.cmake)
+
+me_project(fluent-bit-1.2.1 3RD DEPENDS zlib-1.2.11)
+
+me_cmake(
+    NO_GENERATOR
+    FLAGS
+    -DFLB_TLS=ON
+    -DFLB_PROXY_GO=ON
+    -DFLB_EXAMPLES=OFF
+    -DFLB_SHARED_LIB=OFF
+    -DFLB_BACKTRACE=OFF
+    -DFLB_LUAJIT=OFF
+    -DFLB_OUT_GELF=OFF
+    -DFLB_OUT_TD=OFF
+    -DFLB_FILTER_KUBERNETES=OFF
+    -DFLB_OUT_STACKDRIVER=OFF
+    -DFLB_OUT_BIGQUERY=OFF
+    -DFLB_OUT_AZURE=OFF
+    -DFLB_STREAM_PROCESSOR=OFF
+)
+me_make(TARGETS fluent-bit-bin)
+
+install(
+    FILES ${ME_BUILD_DIR}/bin/fluent-bit
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+    PERMISSIONS
+    OWNER_WRITE
+    OWNER_READ GROUP_READ WORLD_READ
+    OWNER_EXECUTE GROUP_EXECUTE WORLD_EXECUTE
+    COMPONENT ${ME_PROJECT}
+)
+me_install_target(${ME_PROJECT})
