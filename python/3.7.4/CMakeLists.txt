@@ -13,6 +13,7 @@ me_project(
     xz-5.2.4
     readline-8.0
     ncurses-6.1
+    bzip2-1.0.8
 )
 
 set(ZLIB_INCLUDE ${zlib-1.2.11-PREFIX}/include)
@@ -32,6 +33,7 @@ set(
     "-I${readline-8.0-PREFIX}/include"
     "-I${ncurses-6.1-PREFIX}/include/ncurses"
     "-I${ncurses-6.1-PREFIX}/include"
+    "-I${bzip2-1.0.8-PREFIX}/include"
 )
 foreach(ccflags ${PYTHON_CCFLAGS})
     string(CONCAT PYTHON_CFLAGS ${PYTHON_CFLAGS} " " ${ccflags})
@@ -46,6 +48,7 @@ string(
     "-L${xz-5.2.4-PREFIX}/lib "
     "-L${readline-8.0-PREFIX}/lib "
     "-L${ncurses-6.1-PREFIX}/lib "
+    "-L${bzip2-1.0.8-PREFIX}/lib "
 )
 
 string(
