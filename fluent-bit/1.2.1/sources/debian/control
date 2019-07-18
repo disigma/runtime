@@ -1,0 +1,17 @@
+Source: td-agent-bit
+Section: net
+Priority: optional
+Maintainer: Eduardo Silva <eduardo@treasure-data.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.1
+Homepage: http://fluentbit.io
+Vcs-Git: https://github.com/fluent/fluent-bit
+Vcs-Browser: https://github.com/fluent/fluent-bit
+
+Package: td-agent-bit
+Architecture: any
+Depends: ${misc:Depends}
+Description: High performance Log Forwarder for Linux.
+ Fluent Bit is a high performance data collector and log forwarder for Linux. 
+ It provides a flexible architecture and plugins to collect, parser, filter and
+ deliver logs to different backend types.

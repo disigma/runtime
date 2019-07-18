@@ -1,0 +1,18 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - gcc
+  - clang
+
+notifications:
+  irc: "irc.freenode.net#monkey"
+
+before_script:
+  - cd build
+  - cmake ../
+
+script: make
