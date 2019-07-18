@@ -27,7 +27,7 @@ file(MAKE_DIRECTORY "${OUTPUT}")
 
 string(REGEX MATCHALL "[^:]+" FILES ${FILES})
 foreach(FILE ${FILES})
-    list(APPEND SEARCH ${CACHE}/${FILE})
+    list(APPEND SEARCH "${CACHE}/*/${FILE}")
 endforeach(FILE)
 file(GLOB binaries ${SEARCH})
 

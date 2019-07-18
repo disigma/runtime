@@ -4,6 +4,9 @@ include(cmake/MeRoot.cmake)
 include(cmake/Me.cmake)
 
 me_import(
+    telegraf-1.11.2
+    chronograf-1.7.12
+    kapacitor-1.5.3
     influxdb-1.7.7
     fluent-bit-1.2.1
     byobu-5.129
