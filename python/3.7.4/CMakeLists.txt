@@ -14,14 +14,17 @@ me_project(
     readline-8.0
     ncurses-6.1
     bzip2-1.0.8
+    sqlite3-3.29
 )
 
 set(ZLIB_INCLUDE ${zlib-1.2.11-PREFIX}/include)
 set(ZLIB_LIBRARY ${zlib-1.2.11-LIBS})
 set(FFI_INCLUDE ${libffi-3.2.1-PREFIX}/lib/libffi-3.2.1/include)
 set(FFI_LIBRARY ${libffi-3.2.1-LIBS})
+set(SQLITE3_INCLUDE ${sqlite3-3.29-PREFIX}/include)
+set(SQLITE3_EXTRA_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/cmake/sqlite3)
+set(SQLITE3_LIBRARY ${sqlite3-3.29-LIBS})
 configure_file(cmake/Setup.local ${ME_BUILD_DIR}/Modules/Setup.local @ONLY)
-
 
 set(
     PYTHON_CCFLAGS
@@ -34,6 +37,7 @@ set(
     "-I${ncurses-6.1-PREFIX}/include/ncurses"
     "-I${ncurses-6.1-PREFIX}/include"
     "-I${bzip2-1.0.8-PREFIX}/include"
+    #"-I${sqlite3-3.29-PREFIX}/include"
 )
 foreach(ccflags ${PYTHON_CCFLAGS})
     string(CONCAT PYTHON_CFLAGS ${PYTHON_CFLAGS} " " ${ccflags})
@@ -49,6 +53,7 @@ string(
     "-L${readline-8.0-PREFIX}/lib "
     "-L${ncurses-6.1-PREFIX}/lib "
     "-L${bzip2-1.0.8-PREFIX}/lib "
+    #"-L${sqlite3-3.29-PREFIX}/lib "
 )
 
 string(
@@ -57,7 +62,8 @@ string(
     "${ncurses-6.1-LIBS} "
     "${libffi-3.2.1-LIBS} "
     "${xz-5.2.4-LIBS} "
-    "-lnsl "
+    "${sqlite3-3.29-LIBS} "
+    "-lnsl -lm -ldl -lpthread "
 )
 
 me_autoconf(LIBTOOL)
@@ -73,7 +79,7 @@ me_configure(
     --with-lto
     --without-dtrace
     --without-doc-strings
-    --enable-loadable-sqlite-extensions
+    #--enable-loadable-sqlite-extensions
     --with-ssl-default-suites=openssl
     "--with-libs=${PYTHON_LIBS}"
     CCFLAGS
