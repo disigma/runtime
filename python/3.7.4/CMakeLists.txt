@@ -15,6 +15,7 @@ me_project(
     ncurses-6.1
     bzip2-1.0.8
     sqlite3-3.29
+    uuid-1.0.3
 )
 
 set(ZLIB_INCLUDE ${zlib-1.2.11-PREFIX}/include)
@@ -24,6 +25,8 @@ set(FFI_LIBRARY ${libffi-3.2.1-LIBS})
 set(SQLITE3_INCLUDE ${sqlite3-3.29-PREFIX}/include)
 set(SQLITE3_EXTRA_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/cmake/sqlite3)
 set(SQLITE3_LIBRARY ${sqlite3-3.29-LIBS})
+set(UUID_INCLUDE ${uuid-1.0.3-PREFIX}/include)
+set(UUID_LIBRARY ${uuid-1.0.3-LIBS})
 configure_file(cmake/Setup.local ${ME_BUILD_DIR}/Modules/Setup.local @ONLY)
 
 set(
@@ -37,7 +40,6 @@ set(
     "-I${ncurses-6.1-PREFIX}/include/ncurses"
     "-I${ncurses-6.1-PREFIX}/include"
     "-I${bzip2-1.0.8-PREFIX}/include"
-    #"-I${sqlite3-3.29-PREFIX}/include"
 )
 foreach(ccflags ${PYTHON_CCFLAGS})
     string(CONCAT PYTHON_CFLAGS ${PYTHON_CFLAGS} " " ${ccflags})
@@ -53,7 +55,6 @@ string(
     "-L${readline-8.0-PREFIX}/lib "
     "-L${ncurses-6.1-PREFIX}/lib "
     "-L${bzip2-1.0.8-PREFIX}/lib "
-    #"-L${sqlite3-3.29-PREFIX}/lib "
 )
 
 string(
@@ -63,6 +64,7 @@ string(
     "${libffi-3.2.1-LIBS} "
     "${xz-5.2.4-LIBS} "
     "${sqlite3-3.29-LIBS} "
+    "${uuid-1.0.3-LIBS} "
     "-lnsl -lm -ldl -lpthread "
 )
 
