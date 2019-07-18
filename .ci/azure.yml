@@ -33,7 +33,7 @@ jobs:
       -DCMAKE_INSTALL_PREFIX="$(Build.BinariesDirectory)/$(Agent.JobName)"
     displayName: 'Configuring'
   - script:
-      cmake -E env VERBOSE=1 ALL=1 cmake --build cmake-build --target strip-all --
+      cmake -E env VERBOSE=1 NO_DBG=1 ALL=1 cmake --build cmake-build --target strip-all --
     displayName: 'Building'
   - task: ArchiveFiles@2
     inputs:
