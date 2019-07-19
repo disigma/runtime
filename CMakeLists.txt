@@ -4,6 +4,8 @@ include(cmake/MeRoot.cmake)
 include(cmake/Me.cmake)
 
 me_import(
+    zookeeper-3.5.5
+    grafana-6.2.5
     telegraf-1.11.2
     chronograf-1.7.12
     kapacitor-1.5.3
