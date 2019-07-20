@@ -1,0 +1,2 @@
+#!/bin/bash
+"(dirname "${BASH_SOURCE-$0}")/../share/@PROJECT_NAME@/@PROJECT_VERSION@/bin/zkServer.sh" $@

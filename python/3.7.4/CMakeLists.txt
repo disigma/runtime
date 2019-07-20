@@ -30,7 +30,7 @@ set(UUID_LIBRARY ${uuid-1.0.3-LIBS})
 configure_file(cmake/Setup.local ${ME_BUILD_DIR}/Modules/Setup.local @ONLY)
 
 set(
-    PYTHON_CCFLAGS
+    PYTHON_CCFLAG_LIST
     "-I${libressl-2.9.2-PREFIX}/include"
     "-I${zlib-1.2.11-PREFIX}/include"
     "-I${libffi-3.2.1-PREFIX}/include"
@@ -41,32 +41,38 @@ set(
     "-I${ncurses-6.1-PREFIX}/include"
     "-I${bzip2-1.0.8-PREFIX}/include"
 )
-foreach(ccflags ${PYTHON_CCFLAGS})
-    string(CONCAT PYTHON_CFLAGS ${PYTHON_CFLAGS} " " ${ccflags})
+foreach(ccflag ${PYTHON_CCFLAG_LIST})
+    string(CONCAT PYTHON_CCFLAGS ${PYTHON_CCFLAGS} " " ${ccflag})
 endforeach()
 
-string(
-    CONCAT PYTHON_LDFLAGS
-    "-L${libressl-2.9.2-PREFIX}/lib "
-    "-L${zlib-1.2.11-PREFIX}/lib "
-    "-L${libffi-3.2.1-PREFIX}/lib "
-    "-L${expat-2.2.7-PREFIX}/lib "
-    "-L${xz-5.2.4-PREFIX}/lib "
-    "-L${readline-8.0-PREFIX}/lib "
-    "-L${ncurses-6.1-PREFIX}/lib "
-    "-L${bzip2-1.0.8-PREFIX}/lib "
+set(
+    PYTHON_LDFLAG_LIST
+    "-L${libressl-2.9.2-PREFIX}/lib"
+    "-L${zlib-1.2.11-PREFIX}/lib"
+    "-L${libffi-3.2.1-PREFIX}/lib"
+    "-L${expat-2.2.7-PREFIX}/lib"
+    "-L${xz-5.2.4-PREFIX}/lib"
+    "-L${readline-8.0-PREFIX}/lib"
+    "-L${ncurses-6.1-PREFIX}/lib"
+    "-L${bzip2-1.0.8-PREFIX}/lib"
 )
+foreach(ldflag ${PYTHON_LDFLAG_LIST})
+    string(CONCAT PYTHON_LDFLAGS ${PYTHON_LDFLAGS} " " ${ldflag})
+endforeach()
 
-string(
-    CONCAT PYTHON_LIBS
-    "${readline-8.0-LIBS} "
-    "${ncurses-6.1-LIBS} "
-    "${libffi-3.2.1-LIBS} "
-    "${xz-5.2.4-LIBS} "
-    "${sqlite3-3.29-LIBS} "
-    "${uuid-1.0.3-LIBS} "
-    "-lnsl -lm -ldl -lpthread "
+set(
+    PYTHON_LIB_LIST
+    "${readline-8.0-LIBS}"
+    "${ncurses-6.1-LIBS}"
+    "${libffi-3.2.1-LIBS}"
+    "${xz-5.2.4-LIBS}"
+    "${sqlite3-3.29-LIBS}"
+    "${uuid-1.0.3-LIBS}"
+    -lnsl -lm -ldl -lpthread
 )
+foreach(lib ${PYTHON_LIB_LIST})
+    string(CONCAT PYTHON_LIBS ${PYTHON_LIBS} " " ${lib})
+endforeach()
 
 me_autoconf(LIBTOOL)
 me_configure(
@@ -81,11 +87,11 @@ me_configure(
     --with-lto
     --without-dtrace
     --without-doc-strings
-    #--enable-loadable-sqlite-extensions
+    --enable-loadable-sqlite-extensions
     --with-ssl-default-suites=openssl
     "--with-libs=${PYTHON_LIBS}"
     CCFLAGS
-    ${PYTHON_CCFLAGS}
+    ${PYTHON_CCFLAG_LIST}
     ENV
     "CONFIG_SITE=${CMAKE_CURRENT_LIST_DIR}/cmake/config.site"
     "LDFLAGS=${PYTHON_LDFLAGS}"
@@ -94,7 +100,7 @@ me_configure(
 me_make(
     ENV
     "PATH=${CMAKE_CURRENT_LIST_DIR}/cmake:$ENV{PATH}"
-    "CFLAGS=${PYTHON_CFLAGS}"
+    "CFLAGS=${PYTHON_CCFLAGS}"
     "LDFLAGS=${PYTHON_LDFLAGS}"
     OUTPUT make ${ME_INSTALL_PREFIX}/bin/python3.7
     TARGETS build_all altinstall

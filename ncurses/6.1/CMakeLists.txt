@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 include(../../cmake/Me.cmake)
 
 me_project(ncurses-6.1 3RD)
+me_project(ncurses-6.1--panel 3RD ALIAS)
 
 me_configure(
     FLAGS
@@ -17,5 +18,6 @@ me_configure(
     --enable-pc-files
     --without-debug
     --disable-lib-suffixes
+    --with-terminfo-dirs=/etc/terminfo:/lib/terminfo:/usr/share/terminfo
 )
 me_make()
