@@ -18,6 +18,8 @@ me_project(
     uuid-1.0.3
 )
 
+set(PYTHON3_EXECUTABLE "${ME_INSTALL_PREFIX}/bin/python3.7")
+
 set(ZLIB_INCLUDE ${zlib-1.2.11-PREFIX}/include)
 set(ZLIB_LIBRARY ${zlib-1.2.11-LIBS})
 set(FFI_INCLUDE ${libffi-3.2.1-PREFIX}/lib/libffi-3.2.1/include)
@@ -102,8 +104,25 @@ me_make(
     "PATH=${CMAKE_CURRENT_LIST_DIR}/cmake:$ENV{PATH}"
     "CFLAGS=${PYTHON_CCFLAGS}"
     "LDFLAGS=${PYTHON_LDFLAGS}"
-    OUTPUT make ${ME_INSTALL_PREFIX}/bin/python3.7
+    OUTPUT ${PYTHON3_EXECUTABLE}
     TARGETS build_all altinstall
+)
+
+# Build external modules
+set(EXTERNAL_MODULES psutil/5.6.3)
+set(EXTERNAL_MODULES_DIR ${CMAKE_CURRENT_LIST_DIR}/modules)
+foreach(module ${EXTERNAL_MODULES})
+    list(
+        APPEND EXTERNAL_MODULE_COMMANDS
+        COMMAND ${CMAKE_COMMAND} -E chdir "${EXTERNAL_MODULES_DIR}/${module}"
+        ${PYTHON3_EXECUTABLE} "${EXTERNAL_MODULES_DIR}/${module}/setup.py" install
+        WORKING_DIRECTORY ${ME_BUILD_DIR}
+    )
+endforeach(module)
+add_custom_command(
+    OUTPUT make
+    ${EXTERNAL_MODULE_COMMANDS}
+    DEPENDS ${PYTHON3_EXECUTABLE}
 )
 
 install(
