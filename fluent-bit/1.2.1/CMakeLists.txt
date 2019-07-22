@@ -6,6 +6,7 @@ me_project(fluent-bit-1.2.1 3RD DEPENDS zlib-1.2.11)
 
 me_cmake(
     NO_GENERATOR
+    CCFLAGS -DLIBCO_MPROTECT
     FLAGS
     -DFLB_TLS=ON
     -DFLB_PROXY_GO=ON
