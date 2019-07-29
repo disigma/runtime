@@ -4,6 +4,7 @@ include(cmake/MeRoot.cmake)
 include(cmake/Me.cmake)
 
 me_import(
+    ffmpeg-release
     socat-1.7.3.3
     logrotate-3.15.0
     zookeeper-3.5.5
