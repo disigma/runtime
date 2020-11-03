@@ -22,6 +22,7 @@ me_import(
     xz-5.2.4
     uwsgi-2.0.18
     etcd-3.3.18
+    cpulimit-0.2
 )
 
 me_import(${ME_EXTRA_PROJECTS})
