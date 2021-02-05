@@ -8,11 +8,8 @@ me_import(
     ffmpeg-release
     socat-1.7.3.3
     logrotate-3.15.0
-    zookeeper-3.5.5
     grafana-7.4.0
-    telegraf-1.11.2
     chronograf-1.7.12
-    kapacitor-1.5.3
     influxdb-1.7.7
     fluent-bit-1.2.1
     byobu-5.129

@@ -1,2 +1,0 @@
-#!/bin/bash
-exec "$(dirname "${BASH_SOURCE-$0}")/../share/@ME_PROJECT_NAME@/@ME_PROJECT_VERSION@/bin/zkCli.sh" $@
