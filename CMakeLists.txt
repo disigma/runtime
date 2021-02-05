@@ -22,6 +22,7 @@ me_import(
     cpulimit-0.2
     valgrind-3.16.1
     jq-1.6
+    patchelf-0.12
 )
 
 me_import(${ME_EXTRA_PROJECTS})
