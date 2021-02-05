@@ -24,6 +24,7 @@ me_import(
     etcd-3.3.18
     cpulimit-0.2
     valgrind-3.16.1
+    jq-1.6
 )
 
 me_import(${ME_EXTRA_PROJECTS})
