@@ -88,7 +88,7 @@ me_configure(
     --enable-optimizations
     --with-lto
     --without-dtrace
-    --without-doc-strings
+    --with-doc-strings
     --enable-loadable-sqlite-extensions
     --with-ssl-default-suites=openssl
     "--with-libs=${PYTHON_LIBS}"
