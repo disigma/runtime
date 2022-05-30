@@ -32,7 +32,7 @@
 
 struct flb_input_instance;
 struct flb_output_instance;
-FLB_EXPORT pthread_key_t flb_thread_key;
+extern FLB_EXPORT pthread_key_t flb_thread_key;
 
 struct flb_thread
 {

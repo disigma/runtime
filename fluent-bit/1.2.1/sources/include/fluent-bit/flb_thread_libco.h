@@ -63,7 +63,7 @@ struct flb_thread {
 
 #define FLB_THREAD_DATA(th)        (((char *) th) + sizeof(struct flb_thread))
 
-FLB_EXPORT pthread_key_t flb_thread_key;
+extern FLB_EXPORT pthread_key_t flb_thread_key;
 
 static FLB_INLINE void flb_thread_prepare(void)
 {

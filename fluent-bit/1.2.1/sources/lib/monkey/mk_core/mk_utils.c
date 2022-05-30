@@ -157,6 +157,9 @@ int mk_utils_print_errno(int n)
 }
 #endif
 
+time_t mk_core_init_time;
+pthread_key_t mk_utils_error_key;
+
 void mk_print(int type, const char *format, ...)
 {
     time_t now;

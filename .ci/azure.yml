@@ -4,7 +4,7 @@ jobs:
 
 - job: runtime
   pool:
-    vmImage: 'Ubuntu-16.04'
+    vmImage: 'Ubuntu-18.04'
   steps:
   - script:
       cmake -E make_directory cmake-build

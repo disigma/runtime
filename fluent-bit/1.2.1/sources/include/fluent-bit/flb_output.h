@@ -270,7 +270,7 @@ struct flb_libco_out_params {
     struct flb_thread *th;
 };
 
-struct flb_libco_out_params libco_param;
+extern struct flb_libco_out_params libco_param;
 
 static FLB_INLINE void output_params_set(struct flb_thread *th,
                               const void *data, size_t bytes,

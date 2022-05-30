@@ -36,6 +36,8 @@
 #include <fluent-bit/flb_utils.h>
 #include <fluent-bit/flb_plugin_proxy.h>
 
+struct flb_libco_out_params libco_param;
+
 /* Validate the the output address protocol */
 static int check_protocol(const char *prot, const char *output)
 {

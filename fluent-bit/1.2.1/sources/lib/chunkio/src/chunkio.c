@@ -30,6 +30,7 @@
 
 #include <monkey/mk_core/mk_list.h>
 
+int cio_page_size;
 /*
  * Validate if root_path exists, if don't, create it, otherwise
  * check if we have write access to it.

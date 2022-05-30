@@ -67,6 +67,8 @@ extern int asprintf(char **str, const char *fmt, ...);
 /* Number of seconds in a day */
 #define DAY_SECONDS 86400
 
+struct logInfoHead logs;
+
 struct logState {
     char *fn;
     struct tm lastRotated;  /* only tm_hour, tm_mday, tm_mon, tm_year are good! */

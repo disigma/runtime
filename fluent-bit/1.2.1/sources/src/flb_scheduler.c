@@ -31,6 +31,10 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#ifdef FLB_HAVE_FLUSH_LIBCO
+pthread_key_t flb_thread_key;
+#endif
+
 static inline double xmin(double a, double b)
 {
     return a < b ? a : b;

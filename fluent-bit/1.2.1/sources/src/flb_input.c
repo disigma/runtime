@@ -36,6 +36,8 @@
 
 #define protcmp(a, b)  strncasecmp(a, b, strlen(a))
 
+struct flb_libco_in_params libco_in_param;
+
 static int check_protocol(const char *prot, const char *output)
 {
     int len;
