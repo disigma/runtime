@@ -9,8 +9,8 @@ me_import(
     socat-1.7.3.3
     logrotate-3.15.0
     grafana-8.4.5
-    chronograf-1.7.12
-    influxdb-1.7.7
+    chronograf-1.10.6
+    influxdb-1.11.8
     fluent-bit-1.2.1
     byobu-5.129
     nginx-1.17.1
